@@ -30,16 +30,17 @@ params := blockscore.PeopleParams{
     // Fill this in later
 }
 
-person, err := client.CreatePeople(&params)
+person, err := client.People.Create(&params)
 ```
 
 Get a single existing People:
 
 ```go
-person, err = client.RetrievePeople("DESIRED_PERSON_ID")
+person, err = client.People.Retrieve("DESIRED_PERSON_ID")
 ```
 
 Get a list of People:
 
 ```go
+people, err = client.People.List()
 ```
