@@ -6,36 +6,36 @@ import (
 )
 
 type Person struct {
-	Object             string  `json:"object"`
-	Id                 string  `json:"id"`
-	CreatedAt          int64   `json:"created_at"`
-	UpdatedAt          int64   `json:"updated_at"`
-	Status             string  `json:"status"`
-	Livemode           bool    `json:"livemode"`
-	PhoneNumber        string  `json:"phone_number"`
-	IPAddress          string  `json:"ip_address"`
-	BirthDay           int64   `json:"birth_day"`
-	BirthMonth         int64   `json:"birth_month"`
-	BirthYear          int64   `json:"birth_year"`
-	NameFirst          string  `json:"name_first"`
-	NameMiddle         string  `json:"name_middle"`
-	NameLast           string  `json:"name_last"`
-	DocumentType       string  `json:"document_type"`
-	DocumentValue      string  `json:"document_value"`
-	AddressStreet1     string  `json:"address_street1"`
-	AddressStreet2     string  `json:"address_street2"`
-	AddressCity        string  `json:"address_city"`
-	AddressSubdivision string  `json:"address_subdivision"`
-	AddressPostalCode  string  `json:"address_postal_code"`
-	AddressCountryCode string  `json:"address_country_code"`
-	Note               string  `json:"note"`
-	Details            Details `json:"details"`
+	Object             string        `json:"object"`
+	Id                 string        `json:"id"`
+	CreatedAt          int64         `json:"created_at"`
+	UpdatedAt          int64         `json:"updated_at"`
+	Status             string        `json:"status"`
+	Livemode           bool          `json:"livemode"`
+	PhoneNumber        string        `json:"phone_number"`
+	IPAddress          string        `json:"ip_address"`
+	BirthDay           int64         `json:"birth_day"`
+	BirthMonth         int64         `json:"birth_month"`
+	BirthYear          int64         `json:"birth_year"`
+	NameFirst          string        `json:"name_first"`
+	NameMiddle         string        `json:"name_middle"`
+	NameLast           string        `json:"name_last"`
+	DocumentType       string        `json:"document_type"`
+	DocumentValue      string        `json:"document_value"`
+	AddressStreet1     string        `json:"address_street1"`
+	AddressStreet2     string        `json:"address_street2"`
+	AddressCity        string        `json:"address_city"`
+	AddressSubdivision string        `json:"address_subdivision"`
+	AddressPostalCode  string        `json:"address_postal_code"`
+	AddressCountryCode string        `json:"address_country_code"`
+	Note               string        `json:"note"`
+	Details            PersonDetails `json:"details"`
 
 	// Have to figure out this part:
 	// QuestionSets       []QuestionSet `json:"question_sets"`
 }
 
-type Details struct {
+type PersonDetails struct {
 	Address        string `json:"address"`
 	AddressRisk    string `json:"address_risk"`
 	Identification string `json:"identification"`
