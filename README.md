@@ -44,3 +44,9 @@ Get a list of People:
 ```go
 people, err = client.People.List()
 ```
+
+Get a list of X people, offset by Y people:
+
+```go
+people, err = client.People.ListN(X, Y)
+```
