@@ -27,7 +27,23 @@ Create a new person:
 
 ```go
 params := blockscore.PeopleParams{
-    // Fill this in later
+    NameFirst:          "John",
+    NameMiddle:         "P",
+    NameLast:           "Denver",
+    DocumentType:       "ssn",
+    DocumentValue:      "0000",
+    BirthDay:           7,
+    BirthMonth:         6,
+    BirthYear:          1980,
+    AddressStreet1:     "1234 Main Street",
+    AddressStreet2:     "APT 12",
+    AddressCity:        "Palo Alto",
+    AddressSubdivision: "California",
+    AddressPostalCode:  "94025",
+    AddressCountryCode: "US",
+    PhoneNumber:        "123-456-78910",
+    IPAddress:          "127.0.0.1",
+    Note:               "Hello, world",
 }
 
 person, err := client.People.Create(&params)
