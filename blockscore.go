@@ -43,6 +43,7 @@ func SetVersion(version int) {
 
 var (
 	People = new(PersonClient)
+	Companies = new(CompanyClient)
 )
 
 // Error encapsulates an error returned by the BlockScore REST API.
