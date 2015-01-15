@@ -66,3 +66,33 @@ Get a list of X people, offset by Y people:
 ```go
 people, err = client.People.ListN(X, Y)
 ```
+
+### Companies
+
+Create a new company:
+
+```go
+params := blockscore.CompanyParams{
+    // Fill in later.
+}
+
+company, err := client.Companies.Create(&params)
+```
+
+Get a single existing Company:
+
+```go
+company, err = client.Companies.Retrieve("DESIRED_COMPANY_ID")
+```
+
+Get a list of Companies:
+
+```go
+companies, err = client.Companies.List()
+```
+
+Get a list of X companies, offset by Y companies:
+
+```go
+companies, err = client.Companies.ListN(X, Y)
+```
