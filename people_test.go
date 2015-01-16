@@ -37,7 +37,7 @@ func TestCreatePeople(t *testing.T) {
 	resp, err := People.Create(&peopleParams)
 
 	if err != nil {
-		t.Errorf("Expected successful People creation, got Error %s", err.Error())
+		t.Errorf("Expected successful Person creation, got Error %s", err.Error())
 	}
 
 	personID = resp.Id
@@ -115,7 +115,7 @@ func TestRetrievePeople(t *testing.T) {
 	resp, err := People.Retrieve(personID)
 
 	if err != nil {
-		t.Errorf("Expected successful People creation, got Error %s", err.Error())
+		t.Errorf("Expected successful People retrieval, got Error %s", err.Error())
 	}
 
 	if resp.NameFirst != peopleParams.NameFirst {
