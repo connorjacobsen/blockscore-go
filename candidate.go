@@ -1,6 +1,7 @@
 package blockscore
 
 import (
+	"fmt"
 	"net/url"
 	"strconv"
 )
@@ -96,7 +97,9 @@ func (self *CandidateClient) Update(id string, params *CandidateParams) (*Candid
 	}
 
 	// Remove all blank elements from the map.
-	// cleanedValues := values.clean()
+	// Note: Maps are passed by reference, which is why we dont need
+	// to do anything with a return value here.
+	clean(values)
 
 	path := "/candidates/" + url.QueryEscape(id)
 	err := query("PATCH", path, values, &candidate)
@@ -154,6 +157,58 @@ func (self *CandidateClient) list(count, offset int) ([]*Candidate, error) {
 // }
 
 // Ugly, temporary work-around.
-// func (v url.Values) clean() {
-// 	fmt.Printf("Values: %v", v)
-// }
+func clean(v url.Values) url.Values {
+	if v.Get("name_first") == "" {
+		v.Del("name_first")
+	}
+
+	if v.Get("name_middle") == "" {
+		v.Del("name_middle")
+	}
+
+	if v.Get("name_last") == "" {
+		v.Del("name_last")
+	}
+
+	if v.Get("note") == "" {
+		v.Del("note")
+	}
+
+	if v.Get("ssn") == "" {
+		v.Del("ssn")
+	}
+
+	if v.Get("passport") == "" {
+		v.Del("passport")
+	}
+
+	if v.Get("date_of_birth") == "" {
+		v.Del("date_of_birth")
+	}
+
+	if v.Get("address_street1") == "" {
+		v.Del("address_street1")
+	}
+
+	if v.Get("address_street2") == "" {
+		v.Del("address_street2")
+	}
+
+	if v.Get("address_city") == "" {
+		v.Del("address_city")
+	}
+
+	if v.Get("address_subdivision") == "" {
+		v.Del("address_subdivision")
+	}
+
+	if v.Get("address_postal_code") == "" {
+		v.Del("address_postal_code")
+	}
+
+	if v.Get("address_country_code") == "" {
+		v.Del("address_country_code")
+	}
+
+	return v
+}
