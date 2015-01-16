@@ -52,19 +52,19 @@ person, err := client.People.Create(&params)
 Get a single existing People:
 
 ```go
-person, err = client.People.Retrieve("DESIRED_PERSON_ID")
+person, err := client.People.Retrieve("DESIRED_PERSON_ID")
 ```
 
 Get a list of People:
 
 ```go
-people, err = client.People.List()
+people, err := client.People.List()
 ```
 
 Get a list of X people, offset by Y people:
 
 ```go
-people, err = client.People.ListN(X, Y)
+people, err := client.People.ListN(X, Y)
 ```
 
 ### Companies
@@ -102,17 +102,70 @@ company, err := client.Companies.Create(&params)
 Get a single existing Company:
 
 ```go
-company, err = client.Companies.Retrieve("DESIRED_COMPANY_ID")
+company, err := client.Companies.Retrieve("DESIRED_COMPANY_ID")
 ```
 
 Get a list of Companies:
 
 ```go
-companies, err = client.Companies.List()
+companies, err := client.Companies.List()
 ```
 
 Get a list of X companies, offset by Y companies:
 
 ```go
-companies, err = client.Companies.ListN(X, Y)
+companies, err := client.Companies.ListN(X, Y)
+```
+
+### Candidates
+
+Create a Candidate:
+
+```go
+params := CandidateParams{
+    NameFirst:          "John",
+    NameLast:           "Brendekamp",
+    Note:               "12341234",
+    Ssn:                "0001",
+    DateOfBirth:        "1940-08-11",
+    AddressStreet1:     "1 Infinite Loop",
+    AddressCity:        "Harare",
+    AddressCountryCode: "ZW",
+}
+
+candidate, err := client.Candidates.Create(&params)
+```
+
+Retrieve a Candidate:
+
+```go
+candidate, err := client.Candidates.Retrieve("DESIRED_CANDIDATE_ID")
+```
+
+Update a Candidate:
+
+```go
+params := CandidateParams{
+    Passport: "123456789",
+}
+
+candidate, err := client.Candidate.Update("DESIRED_CANDIDATE_ID", &params)
+```
+
+Delete a Candidate:
+
+```go
+candidate, err := client.Candidate.Delete("DESIRED_CANDIDATE_ID")
+```
+
+Get a list of Candidates:
+
+```go
+candidates, err := client.Candidates.List()
+```
+
+Get a list of X Candidates, offset by Y Candidates:
+
+```go
+candidates, err := client.Candidates.ListN(X, Y)
 ```
