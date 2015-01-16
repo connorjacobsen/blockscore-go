@@ -73,7 +73,27 @@ Create a new company:
 
 ```go
 params := blockscore.CompanyParams{
-    // Fill in later.
+    EntityName:               "BlockScore",
+    TaxId:                    "123410000",
+    IncorporationState:       "DE",
+    IncorporationCountryCode: "US",
+    IncorporationType:        "corporation",
+    IncorporationDay:         23,
+    IncorporationMonth:       8,
+    IncorporationYear:        1993,
+    Dbas:                     "BitRemit",
+    RegistrationNumber:       "123123123",
+    Email:                    "test@example.com",
+    Url:                      "https://blockscore.com",
+    PhoneNumber:              "6505555555",
+    IPAddress:                "67.160.8.182",
+    Note:                     "Much wow",
+    AddressStreet1:           "12345 Main Street",
+    AddressStreet2:           "#12",
+    AddressCity:              "Palo Alto",
+    AddressSubdivision:       "CA",
+    AddressPostalCode:        "94025",
+    AddressCountryCode:       "US",
 }
 
 company, err := client.Companies.Create(&params)
