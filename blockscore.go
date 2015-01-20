@@ -45,6 +45,7 @@ var (
 	People     = new(PersonClient)
 	Companies  = new(CompanyClient)
 	Candidates = new(CandidateClient)
+	Watchlists = new(WatchlistClient)
 )
 
 // Error encapsulates an error returned by the BlockScore REST API.
