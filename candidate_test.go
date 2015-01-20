@@ -126,20 +126,3 @@ func TestDeleteCandidate(t *testing.T) {
 		t.Errorf("Error: %s", err.Error())
 	}
 }
-
-var watchlistParams = WatchlistParams{
-	CandidateId: candidateId,
-	MatchType:   "person",
-}
-
-func TestWatchlistSearch(t *testing.T) {
-	candidates, err := Candidates.List()
-	watchlistParams.CandidateId = candidates[0].Id
-
-	_, err = Watchlists.Search(&watchlistParams)
-
-	if err != nil {
-		t.Errorf("Expected successful Watchlist search, got Error %s", err.Error())
-		return
-	}
-}
