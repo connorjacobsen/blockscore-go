@@ -148,12 +148,12 @@ func (self *CandidateClient) History(id string) ([]*Candidate, error) {
 	return resp.Data, err
 }
 
-// func (self *CandidateClient) Hits(id string) ([]*Candidate, error) {
-// 	resp := hitsCandidateResp{}
-// 	path := "/candidates/" + url.QueryEscape(id) + "/hits"
-// 	err := query("GET", path, nil, &resp)
-// 	return resp.Data, err
-// }
+func (self *CandidateClient) Hits(id string) ([]*Candidate, error) {
+	resp := hitsCandidateResp{}
+	path := "/candidates/" + url.QueryEscape(id) + "/hits"
+	err := query("GET", path, nil, &resp)
+	return resp.Data, err
+}
 
 // Ugly, temporary work-around.
 func clean(v url.Values) url.Values {
