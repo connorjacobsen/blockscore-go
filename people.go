@@ -30,9 +30,7 @@ type Person struct {
 	AddressCountryCode string        `json:"address_country_code"`
 	Note               string        `json:"note"`
 	Details            PersonDetails `json:"details"`
-
-	// Have to figure out this part:
-	// QuestionSets       []QuestionSet `json:"question_sets"`
+	QuestionSets       []string      `json:"question_sets"`
 }
 
 type PersonDetails struct {

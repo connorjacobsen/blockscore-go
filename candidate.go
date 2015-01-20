@@ -1,7 +1,6 @@
 package blockscore
 
 import (
-	"fmt"
 	"net/url"
 	"strconv"
 )
