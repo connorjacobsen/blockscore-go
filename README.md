@@ -98,7 +98,7 @@ if err != nil {
 }
 
 // Print the QuestionSet's score.
-questionSet.Score()
+fmt.Printf("Score: %s\n", questionSet.Score())
 ```
 
 Retrieve a QuestionSet:
