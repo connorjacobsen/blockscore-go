@@ -23,7 +23,7 @@ Set your BlockScore API key in an environment variable:
 export BLOCKSCORE_API_KEY="your key"
 ```
 
-You can also set your BlockScore API key in a file:
+OR you can also set your BlockScore API key in a file:
 
 ```go
 blockscore.SetKey("YOUR_API_KEY")
