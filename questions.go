@@ -1,5 +1,10 @@
 package blockscore
 
+import (
+	"net/url"
+	"strconv"
+)
+
 type QuestionSet struct {
 	Object         string     `json:"object"`
 	Id             string     `json:"id"`
@@ -27,4 +32,50 @@ type Answer struct {
 type QuestionSetParams struct {
 	PersonId  string `json:"person_id"`
 	TimeLimit int    `json:"time_limit"` // optional
+}
+
+type QuestionSetClient struct{}
+
+func (self *QuestionSetClient) Create(personId string) (*QuestionSet, error) {
+	questionSet := QuestionSet{}
+	values := url.Values{
+		"person_id": {personId},
+	}
+	err := query("POST", "/question_sets", values, &questionSet)
+	return &questionSet, err
+}
+
+func (self *QuestionSetClient) Retrieve(id string) (*QuestionSet, error) {
+	questionSet := QuestionSet{}
+	path := "/question_sets/" + url.QueryEscape(id)
+	err := query("GET", path, nil, &questionSet)
+	return &questionSet, err
+}
+
+func (self *QuestionSetClient) List() ([]*QuestionSet, error) {
+	return self.list(25, 0)
+}
+
+func (self *QuestionSetClient) ListN(count, offset int) ([]*QuestionSet, error) {
+	if count != 0 {
+		return self.list(count, offset)
+	} else {
+		return self.list(25, offset)
+	}
+}
+
+func (self *QuestionSetClient) list(count, offset int) ([]*QuestionSet, error) {
+	type listQuestionSetResp struct{ Data []*QuestionSet }
+	resp := listQuestionSetResp{}
+
+	values := url.Values{
+		"count":  {strconv.Itoa(count)},
+		"offset": {strconv.Itoa(offset)},
+	}
+
+	err := query("GET", "/question_sets", values, &resp)
+	if err != nil {
+		return nil, err
+	}
+	return resp.Data, nil
 }

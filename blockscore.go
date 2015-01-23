@@ -42,10 +42,11 @@ func SetVersion(version int) {
 }
 
 var (
-	People     = new(PersonClient)
-	Companies  = new(CompanyClient)
-	Candidates = new(CandidateClient)
-	Watchlists = new(WatchlistClient)
+	People       = new(PersonClient)
+	Companies    = new(CompanyClient)
+	Candidates   = new(CandidateClient)
+	QuestionSets = new(QuestionSetClient)
+	Watchlists   = new(WatchlistClient)
 )
 
 // Error encapsulates an error returned by the BlockScore REST API.
