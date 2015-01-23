@@ -46,3 +46,20 @@ func TestQuestionSetListN(t *testing.T) {
 		t.Errorf("Error: %s", err.Error())
 	}
 }
+
+func TestQuestionSetScore(t *testing.T) {
+	params := ScoreParams{
+		Answers: []ScoreAnswer{
+			ScoreAnswer{QuestionId: 1, AnswerId: 1},
+			ScoreAnswer{QuestionId: 2, AnswerId: 1},
+			ScoreAnswer{QuestionId: 3, AnswerId: 1},
+			ScoreAnswer{QuestionId: 4, AnswerId: 1},
+			ScoreAnswer{QuestionId: 5, AnswerId: 1},
+		},
+	}
+
+	_, err := QuestionSets.Score(questionSetId, &params)
+	if err != nil {
+		t.Errorf("Error: %s", err.Error())
+	}
+}

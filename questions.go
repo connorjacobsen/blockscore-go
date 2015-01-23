@@ -25,13 +25,22 @@ type Question struct {
 }
 
 type Answer struct {
-	AnswerId int    `json:"answer_id"`
-	Answer   string `json:"answer"`
+	Id     int    `json:"id"`
+	Answer string `json:"answer"`
 }
 
-type QuestionSetParams struct {
-	PersonId  string `json:"person_id"`
-	TimeLimit int    `json:"time_limit"` // optional
+// type QuestionSetParams struct {
+// 	PersonId  string `json:"person_id"`
+// 	TimeLimit int    `json:"time_limit"` // optional
+// }
+
+type ScoreParams struct {
+	Answers []ScoreAnswer `json:"answers"`
+}
+
+type ScoreAnswer struct {
+	QuestionId int `json:"question_id"`
+	AnswerId   int `json:"answer_id"`
 }
 
 type QuestionSetClient struct{}
@@ -78,4 +87,19 @@ func (self *QuestionSetClient) list(count, offset int) ([]*QuestionSet, error) {
 		return nil, err
 	}
 	return resp.Data, nil
+}
+
+func (self *QuestionSetClient) Score(id string, params *ScoreParams) (*QuestionSet, error) {
+	questionSet := QuestionSet{}
+	path := "/question_sets/" + url.QueryEscape(id) + "/score"
+
+	values := url.Values{}
+	for _, answer := range params.Answers {
+		// Create the correct array for answer scoring.
+		values.Add("answers[][question_id]", strconv.Itoa(answer.QuestionId))
+		values.Add("answers[][answer_id]", strconv.Itoa(answer.AnswerId))
+	}
+
+	err := query("POST", path, values, &questionSet)
+	return &questionSet, err
 }
