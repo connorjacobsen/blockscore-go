@@ -1,10 +1,6 @@
 # blockscore
 Go client library for the BlockScore API.
 
-Note:
-* Some of the APIs may not be idiomatic Go, this is in order to keep those APIs as similar to existing BlockScore client libraries as possible.
-* Some things will be grammatically incorrect (i.e., "get a People" rather than "get a Person"), this is in order to remain consistent with BlockScore API endpoint names, for which things make sense.
-
 ## Usage
 
 Set your BlockScore API key in an environment variable:
@@ -13,13 +9,13 @@ Set your BlockScore API key in an environment variable:
 export BLOCKSCORE_API_KEY="your key"
 ```
 
-*Note: Make sure to use your test key when running the test suite, otherwise the test suite will make live API requests.*
-
-### Client Creation
+You can also set your BlockScore API key in a file:
 
 ```go
-client = blockscore.Client.New("YOUR_BLOCKSCORE_API_KEY")
+blockscore.SetKey("YOUR_API_KEY")
 ```
+
+*Note: Make sure to use your test key when running the test suite, otherwise the test suite will make live API requests.*
 
 ### People
 
@@ -46,25 +42,25 @@ params := blockscore.PeopleParams{
     Note:               "Hello, world",
 }
 
-person, err := client.People.Create(&params)
+person, err := blockscore.People.Create(&params)
 ```
 
 Get a single existing People:
 
 ```go
-person, err := client.People.Retrieve("DESIRED_PERSON_ID")
+person, err := blockscore.People.Retrieve("DESIRED_PERSON_ID")
 ```
 
 Get a list of People:
 
 ```go
-people, err := client.People.List()
+people, err := blockscore.People.List()
 ```
 
 Get a list of X people, offset by Y people:
 
 ```go
-people, err := client.People.ListN(X, Y)
+people, err := blockscore.People.ListN(X, Y)
 ```
 
 ### Question Sets
@@ -73,9 +69,9 @@ Create a QuestionSet:
 
 ```go
 // Get the Person we want a QuestionSet for.
-person, err := client.People.Retrieve("DESIRED_PERSON_ID")
+person, err := blockscore.People.Retrieve("DESIRED_PERSON_ID")
 
-questionSet, err := client.QuestionSets.Create(person.Id)
+questionSet, err := blockscore.QuestionSets.Create(person.Id)
 ```
 
 Score a QuestionSet:
@@ -91,7 +87,7 @@ params := ScoreParams{
     },
 }
 
-questionSet, err := client.QuestionSets.Score("QUESTION_SET_ID", &params)
+questionSet, err := blockscore.QuestionSets.Score("QUESTION_SET_ID", &params)
 
 if err != nil {
     // Error handling for your application.
@@ -104,19 +100,19 @@ fmt.Printf("Score: %s\n", questionSet.Score())
 Retrieve a QuestionSet:
 
 ```go
-questionSet, err := client.QuestionSets.Retrieve("QUESTION_SET_ID")
+questionSet, err := blockscore.QuestionSets.Retrieve("QUESTION_SET_ID")
 ```
 
 Get a list of QuestionSets:
 
 ```go
-questionSets, err := client.QuestionSets.List()
+questionSets, err := blockscore.QuestionSets.List()
 ```
 
 Get a list of X QuestionSets, offset by Y QuestionSets:
 
 ```go
-questionSets, err := client.QuestionSets.ListN(X, Y)
+questionSets, err := blockscore.QuestionSets.ListN(X, Y)
 ```
 
 ### Companies
@@ -148,25 +144,25 @@ params := blockscore.CompanyParams{
     AddressCountryCode:       "US",
 }
 
-company, err := client.Companies.Create(&params)
+company, err := blockscore.Companies.Create(&params)
 ```
 
 Get a single existing Company:
 
 ```go
-company, err := client.Companies.Retrieve("DESIRED_COMPANY_ID")
+company, err := blockscore.Companies.Retrieve("DESIRED_COMPANY_ID")
 ```
 
 Get a list of Companies:
 
 ```go
-companies, err := client.Companies.List()
+companies, err := blockscore.Companies.List()
 ```
 
 Get a list of X companies, offset by Y companies:
 
 ```go
-companies, err := client.Companies.ListN(X, Y)
+companies, err := blockscore.Companies.ListN(X, Y)
 ```
 
 ### Candidates
@@ -185,13 +181,13 @@ params := CandidateParams{
     AddressCountryCode: "ZW",
 }
 
-candidate, err := client.Candidates.Create(&params)
+candidate, err := blockscore.Candidates.Create(&params)
 ```
 
 Retrieve a Candidate:
 
 ```go
-candidate, err := client.Candidates.Retrieve("DESIRED_CANDIDATE_ID")
+candidate, err := blockscore.Candidates.Retrieve("DESIRED_CANDIDATE_ID")
 ```
 
 Update a Candidate:
@@ -201,37 +197,37 @@ params := CandidateParams{
     Passport: "123456789",
 }
 
-candidate, err := client.Candidate.Update("DESIRED_CANDIDATE_ID", &params)
+candidate, err := blockscore.Candidate.Update("DESIRED_CANDIDATE_ID", &params)
 ```
 
 Delete a Candidate:
 
 ```go
-candidate, err := client.Candidate.Delete("DESIRED_CANDIDATE_ID")
+candidate, err := blockscore.Candidate.Delete("DESIRED_CANDIDATE_ID")
 ```
 
 Get a list of Candidates:
 
 ```go
-candidates, err := client.Candidates.List()
+candidates, err := blockscore.Candidates.List()
 ```
 
 Get a list of X Candidates, offset by Y Candidates:
 
 ```go
-candidates, err := client.Candidates.ListN(X, Y)
+candidates, err := blockscore.Candidates.ListN(X, Y)
 ```
 
 View the Revision History of a Candidate:
 
 ```go
-candidateHistory, err := client.Candidates.History("CANDIDATE_ID")
+candidateHistory, err := blockscore.Candidates.History("CANDIDATE_ID")
 ```
 
 View past Watchlist Hits of a Candidate:
 
 ```go
-candidateHits, err := client.Candidates.Hits("CANDIDATE_ID")
+candidateHits, err := blockscore.Candidates.Hits("CANDIDATE_ID")
 ```
 
 ### Watchlists
@@ -244,5 +240,5 @@ watchlistParams := WatchlistParams{
     MatchType:   "person" // search for individuals only
 }
 
-search, err := client.Watchlists.Search(&watchlistParams)
+search, err := blockscore.Watchlists.Search(&watchlistParams)
 ```
