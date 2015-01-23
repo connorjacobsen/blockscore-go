@@ -1,4 +1,4 @@
-blockscore-go [![Build Status](https://travis-ci.org/connorjacobsen/blockscore-go.svg?branch=master)](https://travis-ci.org/connorjacobsen/blockscore-go)
+blockscore-go
 =============
 
 Go client library for the BlockScore API.
