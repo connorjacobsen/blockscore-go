@@ -18,7 +18,7 @@ export BLOCKSCORE_API_KEY="your key"
 ### Client Creation
 
 ```go
-client = blockscore.Client.new("YOUR_BLOCKSCORE_API_KEY")
+client = blockscore.Client.New("YOUR_BLOCKSCORE_API_KEY")
 ```
 
 ### People
@@ -168,4 +168,17 @@ Get a list of X Candidates, offset by Y Candidates:
 
 ```go
 candidates, err := client.Candidates.ListN(X, Y)
+```
+
+### Watchlists
+
+Search a Watchlist:
+
+```go
+watchlistParams := WatchlistParams{
+    CandidateId: "DESIRED_CANDIDATE_ID",
+    MatchType: "person" // search for individuals only
+}
+
+search, err := client.Watchlists.Search(&watchlistParams)
 ```
