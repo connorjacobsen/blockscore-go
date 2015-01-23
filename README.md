@@ -177,7 +177,7 @@ Search a Watchlist:
 ```go
 watchlistParams := WatchlistParams{
     CandidateId: "DESIRED_CANDIDATE_ID",
-    MatchType: "person" // search for individuals only
+    MatchType:   "person" // search for individuals only
 }
 
 search, err := client.Watchlists.Search(&watchlistParams)
