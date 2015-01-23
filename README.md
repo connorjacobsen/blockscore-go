@@ -67,6 +67,58 @@ Get a list of X people, offset by Y people:
 people, err := client.People.ListN(X, Y)
 ```
 
+### Question Sets
+
+Create a QuestionSet:
+
+```go
+// Get the Person we want a QuestionSet for.
+person, err := client.People.Retrieve("DESIRED_PERSON_ID")
+
+questionSet, err := client.QuestionSets.Create(person.Id)
+```
+
+Score a QuestionSet:
+
+```go
+params := ScoreParams{
+    Answers: []ScoreAnswer{
+        ScoreAnswer{QuestionId: 1, AnswerId: 1},
+        ScoreAnswer{QuestionId: 2, AnswerId: 1},
+        ScoreAnswer{QuestionId: 3, AnswerId: 1},
+        ScoreAnswer{QuestionId: 4, AnswerId: 1},
+        ScoreAnswer{QuestionId: 5, AnswerId: 1},
+    },
+}
+
+questionSet, err := client.QuestionSets.Score("QUESTION_SET_ID", &params)
+
+if err != nil {
+    // Error handling for your application.
+}
+
+// Print the QuestionSet's score.
+questionSet.Score()
+```
+
+Retrieve a QuestionSet:
+
+```go
+questionSet, err := client.QuestionSets.Retrieve("QUESTION_SET_ID")
+```
+
+Get a list of QuestionSets:
+
+```go
+questionSets, err := client.QuestionSets.List()
+```
+
+Get a list of X QuestionSets, offset by Y QuestionSets:
+
+```go
+questionSets, err := client.QuestionSets.ListN(X, Y)
+```
+
 ### Companies
 
 Create a new company:
