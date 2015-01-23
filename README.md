@@ -222,6 +222,18 @@ Get a list of X Candidates, offset by Y Candidates:
 candidates, err := client.Candidates.ListN(X, Y)
 ```
 
+View the Revision History of a Candidate:
+
+```go
+candidateHistory, err := client.Candidates.History("CANDIDATE_ID")
+```
+
+View past Watchlist Hits of a Candidate:
+
+```go
+candidateHits, err := client.Candidates.Hits("CANDIDATE_ID")
+```
+
 ### Watchlists
 
 Search a Watchlist:
