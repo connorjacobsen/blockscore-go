@@ -1,7 +1,21 @@
 # blockscore
 Go client library for the BlockScore API.
 
+## Installation
+
+```bash
+go get github.com/connorjacobsen/blockscore-go
+```
+
 ## Usage
+
+Import the package:
+
+```go
+import (
+    "github.com/connorjacobsen/blockscore-go"
+)
+```
 
 Set your BlockScore API key in an environment variable:
 
