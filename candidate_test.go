@@ -106,19 +106,19 @@ func TestListNCandidate(t *testing.T) {
 	}
 }
 
-// func TestHistoryCandidate(t *testing.T) {
-// 	_, err := Candidates.History(candidateId)
-// 	if err != nil {
-// 		t.Errorf("Error: %s", err.Error())
-// 	}
-// }
+func TestHistoryCandidate(t *testing.T) {
+	_, err := Candidates.History(candidateId)
+	if err != nil {
+		t.Errorf("Error: %s", err.Error())
+	}
+}
 
-// func TestHitsCandidate(t *testing.T) {
-// 	_, err := Candidates.Hits(candidateId)
-// 	if err != nil {
-// 		t.Errorf("Error: %s", err.Error())
-// 	}
-// }
+func TestHitsCandidate(t *testing.T) {
+	_, err := Candidates.Hits(candidateId)
+	if err != nil {
+		t.Errorf("Error: %s", err.Error())
+	}
+}
 
 func TestDeleteCandidate(t *testing.T) {
 	_, err := Candidates.Delete(candidateId)

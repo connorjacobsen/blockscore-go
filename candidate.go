@@ -141,11 +141,10 @@ func (self *CandidateClient) list(count, offset int) ([]*Candidate, error) {
 }
 
 func (self *CandidateClient) History(id string) ([]*Candidate, error) {
-	type historyCandidateResp struct{ Data []*Candidate }
-	resp := historyCandidateResp{}
+	var resp []*Candidate
 	path := "/candidates/" + url.QueryEscape(id) + "/history"
 	err := query("GET", path, nil, &resp)
-	return resp.Data, err
+	return resp, err
 }
 
 func (self *CandidateClient) Hits(id string) ([]*Candidate, error) {
