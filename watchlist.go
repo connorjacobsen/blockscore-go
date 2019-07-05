@@ -4,6 +4,7 @@ import (
 	"net/url"
 )
 
+// Watchlist takes a candidate token and perform a global watchlist search
 type Watchlist struct {
 	Object        string   `json:"object"`
 	Livemode      string   `json:"livemode"`
@@ -11,6 +12,7 @@ type Watchlist struct {
 	Matches       []Match  `json:"matches"`
 }
 
+// Match is a matching watchlistd
 type Match struct {
 	WatchlistName      string   `json:"watchlist_name"`
 	MatchingInfo       []string `json:"matching_info"`
@@ -27,9 +29,10 @@ type Match struct {
 	AddressCountryCode string   `json:"address_country_code"`
 }
 
+// WatchlistParams has the paramters for a watchlist
 type WatchlistParams struct {
 	// The ID of the Candidate you have created.
-	CandidateId string `json:"candidate_id"`
+	CandidateID string `json:"candidate_id"`
 
 	// Can either be `person` or `company` and will restrict the search to
 	// only search for people or entities on watchlists respectively.
@@ -37,12 +40,14 @@ type WatchlistParams struct {
 	MatchType string `json:"match_type"`
 }
 
+// WatchlistClient wraps watchlist related methods
 type WatchlistClient struct{}
 
-func (self *WatchlistClient) Search(params *WatchlistParams) (*Watchlist, error) {
+// Search executes a search for the given watchlist
+func (watchlistClient *WatchlistClient) Search(params *WatchlistParams) (*Watchlist, error) {
 	watchlist := Watchlist{}
 	values := url.Values{
-		"candidate_id": {params.CandidateId},
+		"candidate_id": {params.CandidateID},
 		"match_type":   {params.MatchType},
 	}
 	err := query("POST", "/watchlists", values, &watchlist)

@@ -40,7 +40,7 @@ func TestCreatePeople(t *testing.T) {
 		t.Errorf("Expected successful Person creation, got Error %s", err.Error())
 	}
 
-	personID = resp.Id
+	personID = resp.ID
 
 	if resp.NameFirst != peopleParams.NameFirst {
 		t.Errorf("Expected NameFirst: %s, got: %s", peopleParams.NameFirst, resp.NameFirst)
@@ -63,15 +63,15 @@ func TestCreatePeople(t *testing.T) {
 	}
 
 	if resp.BirthDay != peopleParams.BirthDay {
-		t.Errorf("Expected BirthDay: %s, got: %s", peopleParams.BirthDay, resp.BirthDay)
+		t.Errorf("Expected BirthDay: %c, got: %c", peopleParams.BirthDay, resp.BirthDay)
 	}
 
 	if resp.BirthMonth != peopleParams.BirthMonth {
-		t.Errorf("Expected BirthMonth: %s, got: %s", peopleParams.BirthMonth, resp.BirthMonth)
+		t.Errorf("Expected BirthMonth: %c, got: %c", peopleParams.BirthMonth, resp.BirthMonth)
 	}
 
 	if resp.BirthYear != peopleParams.BirthYear {
-		t.Errorf("Expected BirthYear: %s, got: %s", peopleParams.BirthYear, resp.BirthYear)
+		t.Errorf("Expected BirthYear: %c, got: %c", peopleParams.BirthYear, resp.BirthYear)
 	}
 
 	if resp.AddressStreet1 != peopleParams.AddressStreet1 {
@@ -139,15 +139,15 @@ func TestRetrievePeople(t *testing.T) {
 	}
 
 	if resp.BirthDay != peopleParams.BirthDay {
-		t.Errorf("Expected BirthDay: %s, got: %s", peopleParams.BirthDay, resp.BirthDay)
+		t.Errorf("Expected BirthDay: %c, got: %c", peopleParams.BirthDay, resp.BirthDay)
 	}
 
 	if resp.BirthMonth != peopleParams.BirthMonth {
-		t.Errorf("Expected BirthMonth: %s, got: %s", peopleParams.BirthMonth, resp.BirthMonth)
+		t.Errorf("Expected BirthMonth: %c, got: %c", peopleParams.BirthMonth, resp.BirthMonth)
 	}
 
 	if resp.BirthYear != peopleParams.BirthYear {
-		t.Errorf("Expected BirthYear: %s, got: %s", peopleParams.BirthYear, resp.BirthYear)
+		t.Errorf("Expected BirthYear: %c, got: %c", peopleParams.BirthYear, resp.BirthYear)
 	}
 
 	if resp.AddressStreet1 != peopleParams.AddressStreet1 {

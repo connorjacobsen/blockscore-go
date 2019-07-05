@@ -5,9 +5,10 @@ import (
 	"strconv"
 )
 
+// Candidate represents a person object in the blockscore API
 type Candidate struct {
 	Object             string `json:"object"`
-	Id                 string `json:"id"`
+	ID                 string `json:"id"`
 	CreatedAt          int64  `json:"created_at"`
 	UpdatedAt          int64  `json:"updated_at"`
 	Livemode           bool   `json:"livemode"`
@@ -26,6 +27,7 @@ type Candidate struct {
 	AddressCountryCode string `json:"address_country_code"`
 }
 
+// CandidateParams has the paramteres for creating a Candidate
 type CandidateParams struct {
 	NameFirst          string `json:"name_first,omitempty"`
 	NameMiddle         string `json:"name_middle,omitempty"`
@@ -47,9 +49,11 @@ type hitsCandidateResp struct {
 	Data   []*Candidate `json:"data"`
 }
 
+// CandidateClient is a wrapper to associate candidate methods with
 type CandidateClient struct{}
 
-func (self *CandidateClient) Create(params *CandidateParams) (*Candidate, error) {
+// Create creates a new client through a post request
+func (candidateClient *CandidateClient) Create(params *CandidateParams) (*Candidate, error) {
 	candidate := Candidate{}
 	values := url.Values{
 		"name_first":           {params.NameFirst},
@@ -70,14 +74,16 @@ func (self *CandidateClient) Create(params *CandidateParams) (*Candidate, error)
 	return &candidate, err
 }
 
-func (self *CandidateClient) Retrieve(id string) (*Candidate, error) {
+// Retrieve gets a Candidate with the given id
+func (candidateClient *CandidateClient) Retrieve(id string) (*Candidate, error) {
 	candidate := Candidate{}
 	path := "/candidates/" + url.QueryEscape(id)
 	err := query("GET", path, nil, &candidate)
 	return &candidate, err
 }
 
-func (self *CandidateClient) Update(id string, params *CandidateParams) (*Candidate, error) {
+// Update updates Candidate object properties
+func (candidateClient *CandidateClient) Update(id string, params *CandidateParams) (*Candidate, error) {
 	candidate := Candidate{}
 	values := url.Values{
 		"name_first":           {params.NameFirst},
@@ -105,26 +111,29 @@ func (self *CandidateClient) Update(id string, params *CandidateParams) (*Candid
 	return &candidate, err
 }
 
-func (self *CandidateClient) Delete(id string) (*Candidate, error) {
+// Delete removes a candidate with the given id
+func (candidateClient *CandidateClient) Delete(id string) (*Candidate, error) {
 	candidate := Candidate{}
 	path := "/candidates/" + url.QueryEscape(id)
 	err := query("DELETE", path, nil, &candidate)
 	return &candidate, err
 }
 
-func (self *CandidateClient) List() ([]*Candidate, error) {
-	return self.list(25, 0)
+// List returns last added 25 clients
+func (candidateClient *CandidateClient) List() ([]*Candidate, error) {
+	return candidateClient.list(25, 0)
 }
 
-func (self *CandidateClient) ListN(count, offset int) ([]*Candidate, error) {
+// ListN returns the first given count of clients. If given zero, it returns the first 25 clients by default.
+func (candidateClient *CandidateClient) ListN(count, offset int) ([]*Candidate, error) {
 	if count != 0 {
-		return self.list(count, offset)
-	} else {
-		return self.list(25, offset)
+		return candidateClient.list(count, offset)
 	}
+	return candidateClient.list(25, offset)
+
 }
 
-func (self *CandidateClient) list(count, offset int) ([]*Candidate, error) {
+func (candidateClient *CandidateClient) list(count, offset int) ([]*Candidate, error) {
 	type listCandidateResp struct{ Data []*Candidate }
 	resp := listCandidateResp{}
 
@@ -140,14 +149,16 @@ func (self *CandidateClient) list(count, offset int) ([]*Candidate, error) {
 	return resp.Data, nil
 }
 
-func (self *CandidateClient) History(id string) ([]*Candidate, error) {
+// History returns cadidate revision history
+func (candidateClient *CandidateClient) History(id string) ([]*Candidate, error) {
 	var resp []*Candidate
 	path := "/candidates/" + url.QueryEscape(id) + "/history"
 	err := query("GET", path, nil, &resp)
 	return resp, err
 }
 
-func (self *CandidateClient) Hits(id string) ([]*Candidate, error) {
+// Hits returns candidate past hits
+func (candidateClient *CandidateClient) Hits(id string) ([]*Candidate, error) {
 	resp := hitsCandidateResp{}
 	path := "/candidates/" + url.QueryEscape(id) + "/hits"
 	err := query("GET", path, nil, &resp)
