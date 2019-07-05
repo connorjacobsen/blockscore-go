@@ -1,4 +1,6 @@
 // Package blockscore is a Go client library for the Blockscore API.
+//
+// NOTE : This library works with only V4 or newer.
 package blockscore
 
 import (
@@ -18,16 +20,12 @@ import (
 var apiKey string
 
 // The base URL for all BlockScore API requests.
-const apiUrl string = "https://api.blockscore.com"
+const apiURL string = "https://api.blockscore.com"
 
 // The most recent BlockScore API version.
-var apiVersion int = 4
+var apiVersion = 4
 
-// Sets the BlockScore API key to use for authenticating API requests.
-func SetKey(key string) {
-	apiKey = key
-}
-
+// SetKeyEnv Sets the BlockScore API key to use for authenticating API requests.
 func SetKeyEnv() (err error) {
 	apiKey = os.Getenv("BLOCKSCORE_API_KEY")
 	if apiKey == "" {
@@ -36,18 +34,26 @@ func SetKeyEnv() (err error) {
 	return
 }
 
-// Sets the version of the BlockScore API to use.
-// Note: This library is designed to only work with v4 and newer.
+// SetVersion Sets the version of the BlockScore API to use.
 func SetVersion(version int) {
 	apiVersion = version
 }
 
 var (
-	People       = new(PersonClient)
-	Companies    = new(CompanyClient)
-	Candidates   = new(CandidateClient)
+	// People is used to perform domestic identity verification
+	People = new(PersonClient)
+
+	//Companies allow you to verify the authenticity of private and public company information
+	Companies = new(CompanyClient)
+
+	// Candidates are individuals who are queued up to either execute one-off watchlist scans or so that they can be continuously verified using our re-scan system
+	Candidates = new(CandidateClient)
+
+	// QuestionSets help you authenticate customers to see if they are who they say they are
 	QuestionSets = new(QuestionSetClient)
-	Watchlists   = new(WatchlistClient)
+
+	// Watchlists allow you to take a candidate token and perform a global watchlist search
+	Watchlists = new(WatchlistClient)
 )
 
 // Error encapsulates an error returned by the BlockScore REST API.
@@ -67,7 +73,7 @@ func (e *Error) Error() string {
 
 func query(method, path string, values url.Values, v interface{}) error {
 	// Parse the API URL.
-	endpoint, err := url.Parse(apiUrl)
+	endpoint, err := url.Parse(apiURL)
 	if err != nil {
 		return err
 	}
