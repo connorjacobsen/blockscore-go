@@ -7,7 +7,7 @@ import (
 // Watchlist takes a candidate token and perform a global watchlist search
 type Watchlist struct {
 	Object        string   `json:"object"`
-	Livemode      string   `json:"livemode"`
+	Livemode      bool     `json:"livemode"`
 	SearchedLists []string `json:"searched_lists"`
 	Matches       []Match  `json:"matches"`
 }
