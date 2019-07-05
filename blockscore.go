@@ -1,3 +1,4 @@
+// Package blockscore is a Go client library for the Blockscore API.
 package blockscore
 
 import (
