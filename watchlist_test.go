@@ -9,13 +9,13 @@ func init() {
 }
 
 var watchlistParams = WatchlistParams{
-	CandidateId: "",
+	CandidateID: "",
 	MatchType:   "person",
 }
 
 func TestWatchlistSearch(t *testing.T) {
 	candidates, err := Candidates.List()
-	watchlistParams.CandidateId = candidates[0].Id
+	watchlistParams.CandidateID = candidates[0].ID
 
 	_, err = Watchlists.Search(&watchlistParams)
 

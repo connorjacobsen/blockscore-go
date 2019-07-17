@@ -10,23 +10,23 @@ func init() {
 	}
 }
 
-var questionSetId string
+var questionSetID string
 
 func TestQuestionSetCreate(t *testing.T) {
 	people, err := People.List()
-	personId := people[0].Id
+	personID := people[0].ID
 
-	resp, err := QuestionSets.Create(personId)
+	resp, err := QuestionSets.Create(personID)
 
 	if err != nil {
 		t.Errorf("Expected successful QuestionSet creation, got Error: %s", err.Error())
 	}
 
-	questionSetId = resp.Id
+	questionSetID = resp.ID
 }
 
 func TestQuestionSetRetrieve(t *testing.T) {
-	_, err := QuestionSets.Retrieve(questionSetId)
+	_, err := QuestionSets.Retrieve(questionSetID)
 
 	if err != nil {
 		t.Errorf("Expected successful QuestionSet retrieval, got Error: %s", err.Error())
@@ -50,15 +50,15 @@ func TestQuestionSetListN(t *testing.T) {
 func TestQuestionSetScore(t *testing.T) {
 	params := ScoreParams{
 		Answers: []ScoreAnswer{
-			ScoreAnswer{QuestionId: 1, AnswerId: 1},
-			ScoreAnswer{QuestionId: 2, AnswerId: 1},
-			ScoreAnswer{QuestionId: 3, AnswerId: 1},
-			ScoreAnswer{QuestionId: 4, AnswerId: 1},
-			ScoreAnswer{QuestionId: 5, AnswerId: 1},
+			ScoreAnswer{QuestionID: 1, AnswerID: 1},
+			ScoreAnswer{QuestionID: 2, AnswerID: 1},
+			ScoreAnswer{QuestionID: 3, AnswerID: 1},
+			ScoreAnswer{QuestionID: 4, AnswerID: 1},
+			ScoreAnswer{QuestionID: 5, AnswerID: 1},
 		},
 	}
 
-	_, err := QuestionSets.Score(questionSetId, &params)
+	_, err := QuestionSets.Score(questionSetID, &params)
 	if err != nil {
 		t.Errorf("Error: %s", err.Error())
 	}

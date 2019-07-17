@@ -23,7 +23,7 @@ var updateParams = CandidateParams{
 	Passport: "123456789",
 }
 
-var candidateId string
+var candidateID string
 
 func TestCandidateCreate(t *testing.T) {
 	resp, err := Candidates.Create(&candidateParams)
@@ -33,7 +33,7 @@ func TestCandidateCreate(t *testing.T) {
 		return
 	}
 
-	candidateId = resp.Id
+	candidateID = resp.ID
 
 	if resp.NameFirst != candidateParams.NameFirst {
 		t.Errorf("Expected NameFirst: %s, got: %s", candidateParams.NameFirst, resp.NameFirst)
@@ -69,19 +69,19 @@ func TestCandidateCreate(t *testing.T) {
 }
 
 func TestRetrieveCandidate(t *testing.T) {
-	resp, err := Candidates.Retrieve(candidateId)
+	resp, err := Candidates.Retrieve(candidateID)
 
 	if err != nil {
 		t.Errorf("Expected successful Candidate retrieval, got Error: %s", err.Error())
 	}
 
-	if resp.Id != candidateId {
-		t.Errorf("Expected Candidate with Id: %s, got: %s", candidateId, resp.Id)
+	if resp.ID != candidateID {
+		t.Errorf("Expected Candidate with Id: %s, got: %s", candidateID, resp.ID)
 	}
 }
 
 func TestUpdateCandidate(t *testing.T) {
-	resp, err := Candidates.Update(candidateId, &updateParams)
+	resp, err := Candidates.Update(candidateID, &updateParams)
 
 	if err != nil {
 		t.Errorf("Error: %s", err.Error())
@@ -107,21 +107,21 @@ func TestListNCandidate(t *testing.T) {
 }
 
 func TestHistoryCandidate(t *testing.T) {
-	_, err := Candidates.History(candidateId)
+	_, err := Candidates.History(candidateID)
 	if err != nil {
 		t.Errorf("Error: %s", err.Error())
 	}
 }
 
 func TestHitsCandidate(t *testing.T) {
-	_, err := Candidates.Hits(candidateId)
+	_, err := Candidates.Hits(candidateID)
 	if err != nil {
 		t.Errorf("Error: %s", err.Error())
 	}
 }
 
 func TestDeleteCandidate(t *testing.T) {
-	_, err := Candidates.Delete(candidateId)
+	_, err := Candidates.Delete(candidateID)
 	if err != nil {
 		t.Errorf("Error: %s", err.Error())
 	}

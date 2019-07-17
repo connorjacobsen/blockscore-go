@@ -10,7 +10,7 @@ func init() {
 
 var companyParams = CompanyParams{
 	EntityName:               "BlockScore",
-	TaxId:                    "123410000",
+	TaxID:                    "123410000",
 	IncorporationState:       "DE",
 	IncorporationCountryCode: "US",
 	IncorporationType:        "corporation",
@@ -20,7 +20,7 @@ var companyParams = CompanyParams{
 	Dbas:                     "BitRemit",
 	RegistrationNumber:       "123123123",
 	Email:                    "test@example.com",
-	Url:                      "https://blockscore.com",
+	URL:                      "https://blockscore.com",
 	PhoneNumber:              "6505555555",
 	IPAddress:                "67.160.8.182",
 	Note:                     "Much wow",
@@ -32,7 +32,7 @@ var companyParams = CompanyParams{
 	AddressCountryCode:       "US",
 }
 
-var companyId string
+var companyID string
 
 func TestCreateCompany(t *testing.T) {
 	resp, err := Companies.Create(&companyParams)
@@ -42,14 +42,14 @@ func TestCreateCompany(t *testing.T) {
 		return
 	}
 
-	companyId = resp.Id
+	companyID = resp.ID
 
 	if resp.EntityName != companyParams.EntityName {
 		t.Errorf("Expected EntityName: %s, got: %s", companyParams.EntityName, resp.EntityName)
 	}
 
-	if resp.TaxId != companyParams.TaxId {
-		t.Errorf("Expected TaxId: %s, got: %s", companyParams.TaxId, resp.TaxId)
+	if resp.TaxID != companyParams.TaxID {
+		t.Errorf("Expected TaxId: %s, got: %s", companyParams.TaxID, resp.TaxID)
 	}
 
 	if resp.IncorporationState != companyParams.IncorporationState {
@@ -76,8 +76,8 @@ func TestCreateCompany(t *testing.T) {
 		t.Errorf("Expected Email: %s, got: %s", companyParams.Email, resp.Email)
 	}
 
-	if resp.Url != companyParams.Url {
-		t.Errorf("Expected Url: %s, got: %s", companyParams.Url, resp.Url)
+	if resp.URL != companyParams.URL {
+		t.Errorf("Expected Url: %s, got: %s", companyParams.URL, resp.URL)
 	}
 
 	if resp.PhoneNumber != companyParams.PhoneNumber {
@@ -114,14 +114,14 @@ func TestCreateCompany(t *testing.T) {
 }
 
 func TestRetrieveCompany(t *testing.T) {
-	resp, err := Companies.Retrieve(companyId)
+	resp, err := Companies.Retrieve(companyID)
 
 	if err != nil {
 		t.Errorf("Expected successful Company retrieval, got Error %s", err.Error())
 	}
 
-	if resp.Id != companyId {
-		t.Errorf("Expected Company with Id: %s, got: %s", companyId, resp.Id)
+	if resp.ID != companyID {
+		t.Errorf("Expected Company with Id: %s, got: %s", companyID, resp.ID)
 	}
 }
 

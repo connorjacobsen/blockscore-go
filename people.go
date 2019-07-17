@@ -5,9 +5,10 @@ import (
 	"strconv"
 )
 
+// Person is used to perform domestic identity verification
 type Person struct {
 	Object             string        `json:"object"`
-	Id                 string        `json:"id"`
+	ID                 string        `json:"id"`
 	CreatedAt          int64         `json:"created_at"`
 	UpdatedAt          int64         `json:"updated_at"`
 	Status             string        `json:"status"`
@@ -33,6 +34,7 @@ type Person struct {
 	QuestionSets       []string      `json:"question_sets"`
 }
 
+// PersonDetails has the details of the person struct
 type PersonDetails struct {
 	Address        string `json:"address"`
 	AddressRisk    string `json:"address_risk"`
@@ -42,7 +44,7 @@ type PersonDetails struct {
 	Pep            string `json:"pep"`
 }
 
-// Options for creating People.
+// PersonParams has options for creating People.
 type PersonParams struct {
 	NameFirst          string `json:"name_first"`
 	NameMiddle         string `json:"name_middle"`
@@ -63,9 +65,11 @@ type PersonParams struct {
 	Note               string `json:"note"`
 }
 
+// PersonClient wraps person related methods
 type PersonClient struct{}
 
-func (self *PersonClient) Create(params *PersonParams) (*Person, error) {
+// Create creates a new person
+func (personClient *PersonClient) Create(params *PersonParams) (*Person, error) {
 	person := Person{}
 	values := url.Values{
 		"name_first":           {params.NameFirst},
@@ -90,27 +94,29 @@ func (self *PersonClient) Create(params *PersonParams) (*Person, error) {
 	return &person, err
 }
 
-func (self *PersonClient) Retrieve(id string) (*Person, error) {
+// Retrieve pull up a single person at any time
+func (personClient *PersonClient) Retrieve(id string) (*Person, error) {
 	person := Person{}
 	path := "/people/" + url.QueryEscape(id)
 	err := query("GET", path, nil, &person)
 	return &person, err
 }
 
-func (self *PersonClient) List() ([]*Person, error) {
-	return self.list(25, 0)
+// List lists last 25 people.
+func (personClient *PersonClient) List() ([]*Person, error) {
+	return personClient.list(25, 0)
 }
 
-func (self *PersonClient) ListN(count, offset int) ([]*Person, error) {
+// ListN lists the last given number of people
+func (personClient *PersonClient) ListN(count, offset int) ([]*Person, error) {
 	if count != 0 {
-		return self.list(count, offset)
-	} else {
-		// returning count of 0 causes a bug!
-		return self.list(25, offset)
+		return personClient.list(count, offset)
 	}
+	// returning count of 0 causes a bug!
+	return personClient.list(25, offset)
 }
 
-func (self *PersonClient) list(count, offset int) ([]*Person, error) {
+func (personClient *PersonClient) list(count, offset int) ([]*Person, error) {
 	type listPersonResp struct{ Data []*Person }
 	resp := listPersonResp{}
 
