@@ -1,3 +1,3 @@
-module github.com/ahmedaabouzied/blockscore-go
+module github.com/connorjacobsen/blockscore-go
 
 go 1.12
